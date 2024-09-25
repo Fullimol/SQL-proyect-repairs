@@ -12,11 +12,6 @@ CREATE TABLE IF NOT EXISTS repuestos (
     cantidadStock int
 );
 
-/*Clasificación de los repuestos*/
-CREATE TABLE IF NOT EXISTS categorias (
-	idcategoria INT,
-    nombre VARCHAR(100)
-);
 
 /*Datos de los proveedores de repuestos*/
 CREATE TABLE IF NOT EXISTS proveedores (
@@ -51,22 +46,6 @@ CREATE TABLE IF NOT EXISTS clientes (
     direccion VARCHAR(100)
 );
 
-/*Registro de las ventas realizadas*/
-CREATE TABLE IF NOT EXISTS ventas (
-	idventa INT,
-    fecha DATE,
-    cliente VARCHAR(100),
-    total INT
-);
-
-/*Detalles de cada venta */
-CREATE TABLE IF NOT EXISTS detalleventas (
-	iddetalleventa INT,
-    idventa INT,
-    idrepuesto INT,
-	cantidad INT,
-    precio INT /*precio unitario*/
-);
 
 /*Datos de los empleados que gestionan el almacén*/
 CREATE TABLE IF NOT EXISTS empleados (
@@ -129,6 +108,15 @@ CREATE TABLE IF NOT EXISTS detalleordenes (
     precio INT /*precio unitario del repuesto*/
 );
 
+/*Detalle del consumo de repuestos del laboratorio de reparacion*/
+CREATE TABLE IF NOT EXISTS consumoslab (
+	idconsumos INT
+);
+
+/*Detalle del control de stock*/
+CREATE TABLE IF NOT EXISTS auditoriastock (
+	idauditoriastock INT
+);
 
 /***********     CREACIÓN DE ÍNDICES      ***********/
 ALTER TABLE clientes ADD INDEX (idcliente);
@@ -136,12 +124,9 @@ ALTER TABLE clientes ADD INDEX (idcliente);
 
 /***********     CREACIÓN DE CLAVES PRIMARIAS       ***********/
 ALTER TABLE repuestos ADD CONSTRAINT repuestosPK PRIMARY KEY (idrepuesto);
-ALTER TABLE categorias ADD CONSTRAINT categoriasPK PRIMARY KEY (idcategoria);
 ALTER TABLE proveedores ADD CONSTRAINT proveedoresPK PRIMARY KEY (idproveedor);
 ALTER TABLE pedidos ADD CONSTRAINT pedidosPK PRIMARY KEY (idpedido);
 ALTER TABLE detallepedidos ADD CONSTRAINT detallePedidosPK PRIMARY KEY (iddetalle);
-ALTER TABLE ventas ADD CONSTRAINT ventasPK PRIMARY KEY (idventa);
-ALTER TABLE detalleventas ADD CONSTRAINT detalleventasPK PRIMARY KEY (iddetalleventa);
 ALTER TABLE empleados ADD CONSTRAINT empleadosPK PRIMARY KEY (idempleado);
 ALTER TABLE inventarios ADD CONSTRAINT inventariosPK PRIMARY KEY (idinventario);
 ALTER TABLE movimientosinventario ADD CONSTRAINT movimientosinventarioPK PRIMARY KEY (idmovimiento);
@@ -149,6 +134,8 @@ ALTER TABLE devoluciones ADD CONSTRAINT devolucionesPK PRIMARY KEY (iddevolucion
 ALTER TABLE sucursales ADD CONSTRAINT sucursalesPK PRIMARY KEY (idsucursal);
 ALTER TABLE ordenes ADD CONSTRAINT ordenesPK PRIMARY KEY (idorden);
 ALTER TABLE detalleordenes ADD CONSTRAINT detalleordenesPK PRIMARY KEY (iddetalleorden);
+ALTER TABLE consumoslab ADD CONSTRAINT consumoslabPK PRIMARY KEY (idconsumoslab);
+ALTER TABLE auditoriastock ADD CONSTRAINT auditoriastockPK PRIMARY KEY (idauditoriastock);
 
 
 /***********    CREACIÓN DE CLAVES FORANEAS       ***********/
