@@ -134,7 +134,7 @@ ALTER TABLE devoluciones ADD CONSTRAINT devolucionesPK PRIMARY KEY (iddevolucion
 ALTER TABLE sucursales ADD CONSTRAINT sucursalesPK PRIMARY KEY (idsucursal);
 ALTER TABLE ordenes ADD CONSTRAINT ordenesPK PRIMARY KEY (idorden);
 ALTER TABLE detalleordenes ADD CONSTRAINT detalleordenesPK PRIMARY KEY (iddetalleorden);
-ALTER TABLE consumoslab ADD CONSTRAINT consumoslabPK PRIMARY KEY (idconsumoslab);
+ALTER TABLE consumoslab ADD CONSTRAINT consumoslabPK PRIMARY KEY (idconsumos);
 ALTER TABLE auditoriastock ADD CONSTRAINT auditoriastockPK PRIMARY KEY (idauditoriastock);
 
 
@@ -142,11 +142,8 @@ ALTER TABLE auditoriastock ADD CONSTRAINT auditoriastockPK PRIMARY KEY (idaudito
 ALTER TABLE pedidos ADD CONSTRAINT fk_proveedor FOREIGN KEY (idproveedor) REFERENCES proveedores(idproveedor);
 ALTER TABLE detallepedidos ADD CONSTRAINT fk_pedido FOREIGN KEY (idpedido) REFERENCES pedidos(idpedido);
 ALTER TABLE detallepedidos ADD CONSTRAINT fk_repuesto_detallepedidos FOREIGN KEY (idrepuesto) REFERENCES repuestos(idrepuesto);
-ALTER TABLE detalleventas ADD CONSTRAINT fk_venta FOREIGN KEY (idventa) REFERENCES ventas(idventa);
-ALTER TABLE detalleventas ADD CONSTRAINT fk_repuesto_detalleventas FOREIGN KEY (idrepuesto) REFERENCES repuestos(idrepuesto);
 ALTER TABLE inventarios ADD CONSTRAINT fk_repuesto_inventarios FOREIGN KEY (idrepuesto) REFERENCES repuestos(idrepuesto);
 ALTER TABLE movimientosinventario ADD CONSTRAINT fk_repuesto_movimientosinventario FOREIGN KEY (idrepuesto) REFERENCES repuestos(idrepuesto);
-ALTER TABLE devoluciones ADD CONSTRAINT fk_venta_devoluciones FOREIGN KEY (idventa) REFERENCES ventas(idventa);
 ALTER TABLE devoluciones ADD CONSTRAINT fk_repuesto_devoluciones FOREIGN KEY (idrepuesto) REFERENCES repuestos(idrepuesto);
 ALTER TABLE ordenes ADD CONSTRAINT fk_cliente FOREIGN KEY (idcliente) REFERENCES clientes(idcliente);
 ALTER TABLE detalleordenes ADD CONSTRAINT fk_orden FOREIGN KEY (idorden) REFERENCES ordenes(idorden);
