@@ -1,7 +1,5 @@
 # TRABAJO PRÁCTICO BD1
 
-# TRABAJO PRÁCTICO BD1
-
 ## REQUERIMIENTOS:
 - Armar catálogo de partes. (Ver TABLA 1)
 - Reporte con datos de proveedores. (Ver TABLA 2)
