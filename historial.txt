@@ -3,6 +3,7 @@ TRABAJO PRÁCTICO BD1
 
 ---------------------------------------------------------------------------------------------------------
 V2-------------------------------------------------------------------------------------------------------
+
 ****** REQUERIMIENTOS: ****** 
 Armar catalogo de partes. (Ver TABLA 1)
 Reporte con datos de proveedores. (Ver TABLA 2)
@@ -17,6 +18,7 @@ Armar pedido a cliente interno. (Ver TABLA 10)
 Reporte de Ordenes pendientes de entrega. (Ver TABLA 11)
 Requerimientos: Reporte de consumos de materiales. (Ver TABLA 12)
 Requerimientos: Registrar auditoria de inventario. (Ver TABLA 13)
+
 
 ****** TABLAS CREADAS: ******
 1-  REPUESTOS: Información sobre cada repuesto (ID, nombre, descripción, precio, cantidad en stock).
@@ -35,7 +37,22 @@ Requerimientos: Registrar auditoria de inventario. (Ver TABLA 13)
 
 
 ****** ÍNDICES CREADOS: ******
-Solo tiene índice la tabla 'clientes' porque sino me tiraba un error al crear su clave foránea.
+Se crea un índice por cada columna de la tabla que posiblemente tengan consultas mas frecuentes.
+
+
+****** CHECK CONSTRAINTS: ******
+Tabla repuestos:
+	chk_precio y chk_cantidadStock: Evitar números negativos.
+
+Tabla repuestos:
+	chk_precio_detalle y chk_precio_detalleorden: Evitar números negativos.
+
+Tabla pedidos:
+	chk_estado: solo permite que tenga valores ('PEN', 'PRO', 'ENV', 'REC', 'CAN', 'DEV').
+	chk_estado_orden: solo permite que tenga valores ('pendiente', 'en proceso', 'completada', 'cancelada').
+
+Tabla movimientosinventario:
+	chk_tipo_movimiento: solo permite que tenga valores ('entrada', 'salida').
 
 
 ****** CLAVES PRIMARIAS CREADAS: (PK) ******

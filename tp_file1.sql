@@ -120,6 +120,18 @@ CREATE TABLE IF NOT EXISTS auditoriastock (
 
 /***********     CREACIÓN DE ÍNDICES      ***********/
 ALTER TABLE clientes ADD INDEX (idcliente);
+ALTER TABLE pedidos ADD INDEX (idproveedor); 
+ALTER TABLE detallepedidos ADD INDEX (idpedido); 
+ALTER TABLE detallepedidos ADD INDEX (idrepuesto); 
+ALTER TABLE inventarios ADD INDEX (idrepuesto);
+ALTER TABLE movimientosinventario ADD INDEX (idrepuesto); 
+ALTER TABLE devoluciones ADD INDEX (idrepuesto); 
+ALTER TABLE ordenes ADD INDEX (idcliente); 
+ALTER TABLE detalleordenes ADD INDEX (idorden);
+ALTER TABLE detalleordenes ADD INDEX (idrepuesto);
+ALTER TABLE pedidos ADD INDEX (fecha); 
+ALTER TABLE movimientosinventario ADD INDEX (fecha); 
+ALTER TABLE ordenes ADD INDEX (fecha);
 
 
 /***********     CREACIÓN DE CLAVES PRIMARIAS       ***********/
@@ -136,6 +148,16 @@ ALTER TABLE ordenes ADD CONSTRAINT ordenesPK PRIMARY KEY (idorden);
 ALTER TABLE detalleordenes ADD CONSTRAINT detalleordenesPK PRIMARY KEY (iddetalleorden);
 ALTER TABLE consumoslab ADD CONSTRAINT consumoslabPK PRIMARY KEY (idconsumos);
 ALTER TABLE auditoriastock ADD CONSTRAINT auditoriastockPK PRIMARY KEY (idauditoriastock);
+
+
+/***********     CREACIÓN DE CHECK CONSTRAINTS       ***********/
+ALTER TABLE repuestos ADD CONSTRAINT chk_precio CHECK (precio > 0);
+ALTER TABLE repuestos ADD CONSTRAINT chk_cantidadStock CHECK (cantidadStock >= 0);
+ALTER TABLE detallepedidos ADD CONSTRAINT chk_precio_detalle CHECK (precio > 0);
+ALTER TABLE detalleordenes ADD CONSTRAINT chk_precio_detalleorden CHECK (precio > 0);
+ALTER TABLE pedidos ADD CONSTRAINT chk_estado CHECK (estado IN ('PEN', 'PRO', 'ENV', 'REC', 'CAN', 'DEV'));
+ALTER TABLE ordenes ADD CONSTRAINT chk_estado_orden CHECK (estado IN ('pendiente', 'en proceso', 'completada', 'cancelada'));
+ALTER TABLE movimientosinventario ADD CONSTRAINT chk_tipo_movimiento CHECK (tipo IN ('entrada', 'salida'));
 
 
 /***********    CREACIÓN DE CLAVES FORANEAS       ***********/
