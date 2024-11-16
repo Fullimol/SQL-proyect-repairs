@@ -1,22 +1,22 @@
 # TRABAJO PRÁCTICO BD1
 
-## REQUERIMIENTOS:
-- Armar catálogo de partes. (Ver TABLA 1)
-- Reporte con datos de proveedores. (Ver TABLA 2)
-- Reporte de Órdenes Compradas a Proveedores. (Ver TABLA 3)
-- Armar pedido pendientes de entrega clientes externos. (Ver TABLA 4)
-- Reporte con datos de clientes. (Ver TABLA 5)
-- Reporte con datos de empleados que gestionan el almacén. (Ver TABLA 6)
-- Reporte del Inventario. (Ver TABLA 7)
-- Reporte de pedidos entregados. (Ver TABLA 8)
-- Armar gestión de devolución de repuestos a proveedores. (Ver TABLA 9)
-- Armar pedido a cliente interno. (Ver TABLA 10)
-- Reporte de Órdenes pendientes de entrega. (Ver TABLA 11)
-- Requerimientos: Reporte de consumos de materiales. (Ver TABLA 12)
-- Requerimientos: Registrar auditoría de inventario. (Ver TABLA 13)
+## Requerimientos
+1. Armar catálogo de partes. (Ver TABLA 1)
+2. Reporte con datos de proveedores. (Ver TABLA 2)
+3. Reporte de órdenes compradas a proveedores. (Ver TABLA 3)
+4. Armar pedido pendiente de entrega a clientes externos. (Ver TABLA 4)
+5. Reporte con datos de clientes. (Ver TABLA 5)
+6. Reporte con datos de empleados que gestionan el almacén. (Ver TABLA 6)
+7. Reporte del inventario. (Ver TABLA 7)
+8. Reporte de pedidos entregados. (Ver TABLA 8)
+9. Armar gestión de devolución de repuestos a proveedores. (Ver TABLA 9)
+10. Armar pedido a cliente interno. (Ver TABLA 10)
+11. Reporte de órdenes pendientes de entrega. (Ver TABLA 11)
+12. Requerimientos: Reporte de consumos de materiales. (Ver TABLA 12)
+13. Requerimientos: Registrar auditoría de inventario. (Ver TABLA 13)
 
-## TABLAS CREADAS:
-1. **REPUESTOS**: Información sobre cada repuesto (ID, nombre, descripción, precio, cantidad en stock).
+## Tablas Creadas
+1. **RE repuestos**: Información sobre cada repuesto (ID, nombre, descripción, precio, cantidad en stock).
 2. **PROVEEDORES**: Datos de los proveedores de repuestos (ID, nombre, contacto, dirección).
 3. **PEDIDOS**: Información sobre los pedidos realizados a los proveedores (ID, fecha, proveedor, estado).
 4. **DETALLEPEDIDOS**: Detalles de cada pedido (ID, pedido ID, repuesto ID, cantidad, precio).
@@ -30,32 +30,46 @@
 12. **CONSUMOSLAB**: Detalle del consumo de repuestos del laboratorio de reparación.
 13. **AUDITORIASTOCK**: Detalle del control de stock.
 
-## ÍNDICES CREADOS:
-Solo tiene índice la tabla 'clientes' porque sino me tiraba un error al crear su clave foránea.
+## Índices Creados
+- Se crea un índice por cada columna de la tabla que posiblemente tenga consultas más frecuentes.
 
-## CLAVES PRIMARIAS CREADAS (PK):
-Cada una de las tablas tiene su propio ID como PrimaryKey.
+## Check Constraints
+### Tabla repuestos:
+- **chk_precio** y **chk_cantidadStock**: Evitar números negativos.
 
-## CLAVES FORÁNEAS CREADAS (FK):
-- **Tabla pedidos**:
-  - `fk_proveedor`: Hace referencia a `idproveedor` en la tabla `proveedores`.
+### Tabla detallepedidos y detalleordenes:
+- **chk_precio_detalle** y **chk_precio_detalleorden**: Evitar números negativos.
 
-- **Tabla detallepedidos**:
-  - `fk_pedido`: Hace referencia a `idpedido` en la tabla `pedidos`.
-  - `fk_repuesto_detallepedidos`: Hace referencia a `idrepuesto` en la tabla `repuestos`.
+### Tabla pedidos:
+- **chk_estado**: Solo permite que tenga valores ('PEN', 'PRO', 'ENV', 'REC', 'CAN', 'DEV').
+- **chk_estado_orden**: Solo permite que tenga valores ('pendiente', 'en proceso', 'completada', 'cancelada').
 
-- **Tabla inventarios**:
-  - `fk_repuesto_inventarios`: Hace referencia a `idrepuesto` en la tabla `repuestos`.
+### Tabla movimientosinventario:
+- **chk_tipo_movimiento**: Solo permite que tenga valores ('entrada', 'salida').
 
-- **Tabla movimientosinventario**:
-  - `fk_repuesto_movimientosinventario`: Hace referencia a `idrepuesto` en la tabla `repuestos`.
+## Claves Primarias Creadas (PK)
+- Cada una de las tablas tiene su propio id como PrimaryKey.
 
-- **Tabla devoluciones**:
-  - `fk_repuesto_devoluciones`: Hace referencia a `idrepuesto` en la tabla `repuestos`.
+## Claves Foráneas Creadas (FK)
+### Tabla pedidos:
+- **fk_proveedor**: Hace referencia a `idproveedor` en la tabla `proveedores`.
 
-- **Tabla ordenes**:
-  - `fk_cliente`: Hace referencia a `idcliente` en la tabla `clientes`.
+### Tabla detallepedidos:
+- **fk_pedido**: Hace referencia a `idpedido` en la tabla `pedidos`.
+- **fk_repuesto_detallepedidos**: Hace referencia a `idrepuesto` en la tabla `repuestos`.
 
-- **Tabla detalleordenes**:
-  - `fk_orden`: Hace referencia a `idorden` en la tabla `ordenes`.
-  - `fk_repuesto_detalleordenes`: Hace referencia a `idrepuesto` en la tabla `repuestos`.
+### Tabla inventarios:
+- **fk_repuesto_inventarios**: Hace referencia a `idrepuesto` en la tabla `repuestos`.
+
+### Tabla movimientosinventario:
+- **fk_repuesto_movimientosinventario**: Hace referencia a `idrepuesto` en la tabla `repuestos`.
+
+### Tabla devoluciones:
+- **fk_repuesto_devoluciones**: Hace referencia a `idrepuesto` en la tabla `repuestos`.
+
+### Tabla ordenes:
+- **fk_cliente**: Hace referencia a `idcliente` en la tabla `clientes`.
+
+### Tabla detalleordenes:
+- **fk_orden**: Hace referencia a `idorden` en la tabla `ordenes`.
+- **fk_repuesto_detalleordenes**: Hace referencia a `idrepuesto` en la tabla `repuestos`.
