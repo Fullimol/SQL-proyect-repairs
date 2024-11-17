@@ -5,7 +5,7 @@ use proyecto_repair;
 /***********     CREACIÓN DE TABLAS       ***********/
 /*Información sobre cada repuesto*/
 CREATE TABLE IF NOT EXISTS repuestos (
-	idrepuesto INT,
+	idrepuesto INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100),
     descripcion VARCHAR(100),
     precio int,
@@ -118,6 +118,25 @@ CREATE TABLE IF NOT EXISTS auditoriastock (
 	idauditoriastock INT
 );
 
+CREATE TABLE IF NOT EXISTS diagnosticos_reparacion (
+    iddiagnostico INT AUTO_INCREMENT PRIMARY KEY,
+    idorden INT, -- Relacionado con la tabla ordenes
+    descripcion VARCHAR(255), -- Breve diagnóstico hecho por el técnico
+    fecha DATE, -- Fecha en la que se realizó el diagnóstico
+    idempleado INT -- Técnico encargado del diagnóstico del equipo, se relaciona con la tabla empleados
+);
+
+CREATE TABLE IF NOT EXISTS historial_reparaciones (
+    idhistorial INT AUTO_INCREMENT PRIMARY KEY,
+    idorden INT, -- Relacionado con la tabla ordenes
+    fecha_inicio DATE, -- Fecha de comienzo de reparación
+    fecha_fin DATE, -- Fecha de finalización de reparación
+    descripcion_reparacion VARCHAR(255), -- Descripción de lo que se realizó en la reparación
+    idempleado INT, -- Relacionado con la tabla empleados, empleado encargado de la reparación del equipo
+    tiempo_reparacion INT -- Tiempo en horas que tomó la reparación del equipo
+);
+
+
 /***********     CREACIÓN DE ÍNDICES      ***********/
 ALTER TABLE clientes ADD INDEX (idcliente);
 ALTER TABLE pedidos ADD INDEX (idproveedor); 
@@ -135,7 +154,7 @@ ALTER TABLE ordenes ADD INDEX (fecha);
 
 
 /***********     CREACIÓN DE CLAVES PRIMARIAS       ***********/
-ALTER TABLE repuestos ADD CONSTRAINT repuestosPK PRIMARY KEY (idrepuesto);
+/*ALTER TABLE repuestos ADD CONSTRAINT repuestosPK PRIMARY KEY (idrepuesto);*/
 ALTER TABLE proveedores ADD CONSTRAINT proveedoresPK PRIMARY KEY (idproveedor);
 ALTER TABLE pedidos ADD CONSTRAINT pedidosPK PRIMARY KEY (idpedido);
 ALTER TABLE detallepedidos ADD CONSTRAINT detallePedidosPK PRIMARY KEY (iddetalle);
@@ -170,3 +189,7 @@ ALTER TABLE devoluciones ADD CONSTRAINT fk_repuesto_devoluciones FOREIGN KEY (id
 ALTER TABLE ordenes ADD CONSTRAINT fk_cliente FOREIGN KEY (idcliente) REFERENCES clientes(idcliente);
 ALTER TABLE detalleordenes ADD CONSTRAINT fk_orden FOREIGN KEY (idorden) REFERENCES ordenes(idorden);
 ALTER TABLE detalleordenes ADD CONSTRAINT fk_repuesto_detalleordenes FOREIGN KEY (idrepuesto) REFERENCES repuestos(idrepuesto);
+
+
+ALTER TABLE diagnosticos_reparacion ADD CONSTRAINT FOREIGN KEY (idorden) REFERENCES ordenes(idorden), ADD CONSTRAINT FOREIGN KEY (idempleado) REFERENCES empleados(idempleado);
+ALTER TABLE historial_reparaciones ADD CONSTRAINT FOREIGN KEY (idorden) REFERENCES ordenes(idorden), ADD CONSTRAINT FOREIGN KEY (idempleado) REFERENCES empleados(idempleado);
