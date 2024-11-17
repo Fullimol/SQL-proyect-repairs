@@ -14,6 +14,8 @@
 11. Reporte de órdenes pendientes de entrega. (Ver TABLA 11)
 12. Reporte de consumos de materiales. (Ver TABLA 12)
 13. Registrar auditoría de inventario. (Ver TABLA 13)
+14. Registro de diagnostico de cada. (Ver TABLA 14)
+15. Reparaciones realizadas. (Ver TABLA 15)
 
 ## Tablas Creadas
 1. **REPUESTOS**: Información sobre cada repuesto (ID, nombre, descripción, precio, cantidad en stock).
@@ -29,6 +31,8 @@
 11. **DETALLEORDENES**: Detalles de cada orden de trabajo (ID, orden de trabajo ID, repuesto ID, cantidad, precio).
 12. **CONSUMOSLAB**: Detalle del consumo de repuestos del laboratorio de reparación.
 13. **AUDITORIASTOCK**: Detalle del control de stock.
+14. **DIAGNOSTICOS_REPARACION**: Registro de diagnostico de cada orden de trabajo. (ID, orden ID, descripción, fecha, empleado ID)
+15. **HISTORIAL_REPARACIONES**: cada una de las reparaciones que se han hecho (ya finalizadas). (ID, orden ID, fecha_inicio, fecha_fin, descripción, empleado ID, tiempo_reparacion)
 
 ## Índices Creados
 - Se crea un índice por cada columna de la tabla que posiblemente tenga consultas más frecuentes.
@@ -73,3 +77,11 @@
 ### Tabla detalleordenes:
 - **fk_orden**: Hace referencia a `idorden` en la tabla `ordenes`.
 - **fk_repuesto_detalleordenes**: Hace referencia a `idrepuesto` en la tabla `repuestos`.
+
+### Tabla diagnosticos_reparacion: 
+-	**fk_orden_diagnostico**: Hace referencia a `idorden` en la tabla `ordenes`. 
+-	**fk_empleado_diagnostico**: Hace referencia a `idempleado` en la tabla `empleados`. 
+
+### Tabla historial_reparaciones: 
+-	**fk_orden_historial**: Hace referencia a `idorden` en la tabla `ordenes`.
+-	**fk_empleado_historial**: Hace referencia a `idempleado` en la tabla `empleados`.
