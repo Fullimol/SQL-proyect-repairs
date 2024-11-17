@@ -12,11 +12,11 @@
 9. Armar gestión de devolución de repuestos a proveedores. (Ver TABLA 9)
 10. Armar pedido a cliente interno. (Ver TABLA 10)
 11. Reporte de órdenes pendientes de entrega. (Ver TABLA 11)
-12. Requerimientos: Reporte de consumos de materiales. (Ver TABLA 12)
-13. Requerimientos: Registrar auditoría de inventario. (Ver TABLA 13)
+12. Reporte de consumos de materiales. (Ver TABLA 12)
+13. Registrar auditoría de inventario. (Ver TABLA 13)
 
 ## Tablas Creadas
-1. **RE repuestos**: Información sobre cada repuesto (ID, nombre, descripción, precio, cantidad en stock).
+1. **REPUESTOS**: Información sobre cada repuesto (ID, nombre, descripción, precio, cantidad en stock).
 2. **PROVEEDORES**: Datos de los proveedores de repuestos (ID, nombre, contacto, dirección).
 3. **PEDIDOS**: Información sobre los pedidos realizados a los proveedores (ID, fecha, proveedor, estado).
 4. **DETALLEPEDIDOS**: Detalles de cada pedido (ID, pedido ID, repuesto ID, cantidad, precio).
