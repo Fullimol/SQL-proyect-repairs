@@ -164,6 +164,18 @@ ALTER TABLE devoluciones ADD INDEX (id_pedido_compra);
 ALTER TABLE devoluciones ADD INDEX (id_proveedor);
 ALTER TABLE devoluciones ADD INDEX (id_repuesto);
 
+/***********     CREACIÓN DE UNIQUE KEYS***********/
+ALTER TABLE catalogo ADD UNIQUE (referencia);
+ALTER TABLE empleados ADD UNIQUE (usuario);
+ALTER TABLE clientes_detalle ADD UNIQUE (mail);
+ALTER TABLE proveedores ADD UNIQUE (mail);
+ALTER TABLE detalle_ordenes_compra ADD UNIQUE (id_orden_compra, id_repuesto);
+ALTER TABLE entradas_inventario ADD UNIQUE (id_orden_compra, id_repuesto);
+ALTER TABLE detalle_pedidos ADD UNIQUE (id_pedido, id_repuesto);
+ALTER TABLE salidas_inventario ADD UNIQUE (id_pedido, id_repuesto);
+ALTER TABLE auditoria_inventario ADD UNIQUE (id_repuesto, fecha_auditoria);
+ALTER TABLE motivo_devoluciones ADD UNIQUE (descripcion);
+
 /***********    CREACIÓN DE CLAVES FORÁNEAS       ***********/
 ALTER TABLE inventario ADD CONSTRAINT fk_inventario FOREIGN KEY (id_repuesto) REFERENCES catalogo(id_repuesto);
 ALTER TABLE cliente_detalles ADD CONSTRAINT fk_clientesDetalle FOREIGN KEY (tipo_cliente) REFERENCES cliente_tipo(tipo_cliente);
